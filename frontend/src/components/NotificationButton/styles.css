@@ -1,4 +1,4 @@
-.btn{
+.dsmeta-red-btn{
 	border: solid 1px #ff6b72;
 	border-radius:4px ;
 	background: rgba(255, 107, 115, 0.1);
@@ -10,6 +10,6 @@
 	cursor: pointer;
 }
 
-.btn img {
+.dsmeta-red-btn img {
 	width:20px;
 }

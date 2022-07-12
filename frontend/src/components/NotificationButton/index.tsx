@@ -1,10 +1,10 @@
 import React from 'react';
 
 import icon from '../../assets/img/notification-icon.svg';
-import styles from './styles.module.css';
+import './styles.css';
 
 function NotificationButton () {
-  return <div className={styles.btn}>
+  return <div className='dsmeta-red-btn'>
     <img src={icon} alt='notificar'/>
   </div>;
 }
