@@ -6,8 +6,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './styles.css';
 
 function SalesCard () {
-  const [minDate, setminDate] = useState<Date>(new Date(new Date().setDate(new Date().getDate() - 365)));
-  const [maxDate, setmaxDate] = useState<Date>(new Date());
+  const YEAR_BEFORE_TODAY_DATE = new Date(new Date().setDate(new Date().getDate() - 365));
+  const TODAY_DATE = new Date();
+  const [minDate, setminDate] = useState<Date>(YEAR_BEFORE_TODAY_DATE);
+  const [maxDate, setmaxDate] = useState<Date>(TODAY_DATE);
 
   return <div className='dsmeta-card'>
             <h2 className='dsmeta-sales-title'>Vendas</h2>
