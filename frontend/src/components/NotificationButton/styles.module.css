@@ -1,0 +1,15 @@
+.btn{
+	border: solid 1px #ff6b72;
+	border-radius:4px ;
+	background: rgba(255, 107, 115, 0.1);
+	height: 45px;
+	width: 45px;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.btn img {
+	width:20px;
+}
