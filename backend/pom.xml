@@ -45,7 +45,14 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+	<dependency>
+		<groupId>com.twilio.sdk</groupId>
+		<artifactId>twilio</artifactId>
+		<version>8.31.1</version>
+	</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -58,6 +65,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.1.0</version>
 			</plugin>
+
 		</plugins>
 	</build>
 
