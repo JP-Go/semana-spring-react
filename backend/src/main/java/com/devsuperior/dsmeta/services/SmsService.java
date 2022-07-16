@@ -30,14 +30,17 @@ public class SmsService {
   public void sendSms(Long saleId) {
 
     Sale sale = saleRepository.findById(saleId).get();
-    String sellerName = sale.getSellerName();
-    String formattedDate = sale.getDate().format(DateTimeFormatter.ofPattern("MM/yyyy"));
+    String formattedDate = sale.getDate().getMonthValue() + "/" + sale.getDate().getYear();
     String amountSold = String.format("%.2f", sale.getAmount());
 
     String msg =
-        String.format(
-            "O Vendedor %s foi destaque em %s com um total de R$ %s",
-            sellerName, formattedDate, amountSold);
+        "O Vendedor "
+            + sale.getSellerName()
+            + "foi destaque em "
+            + formattedDate
+            + "vendendo um total de R$ "
+            + amountSold;
+
     Twilio.init(twilioSid, twilioKey);
 
     PhoneNumber to = new PhoneNumber(twilioPhoneTo);
@@ -45,6 +48,8 @@ public class SmsService {
 
     Message message = Message.creator(to, from, msg).create();
 
-    System.out.println(message.getSid());
+    System.out.println(
+        "[TWILIO] Message was sent in "
+            + message.getDateSent().format(DateTimeFormatter.ISO_DATE_TIME));
   }
 }
