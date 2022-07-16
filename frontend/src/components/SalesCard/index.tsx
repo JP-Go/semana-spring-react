@@ -7,6 +7,7 @@ import './styles.css';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/request';
 import { Sale } from '../../models/sale';
+import dateService from '../../services/dateService';
 
 function SalesCard () {
   const YEAR_BEFORE_TODAY_DATE = new Date(new Date().setDate(new Date().getDate() - 365));
@@ -16,12 +17,17 @@ function SalesCard () {
   const [maxDate, setmaxDate] = useState<Date>(TODAY_DATE);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/sales`).then(
+    axios.get(`${BASE_URL}/sales`, {
+      params: {
+        minDate: dateService.convertToISODate(minDate),
+        maxDate: dateService.convertToISODate(maxDate)
+      }
+    }).then(
       (res) => {
         setSales(res.data.content);
       }
     ).catch(console.error);
-  }, []);
+  }, [minDate, maxDate]);
 
   return <div className='dsmeta-card'>
             <h2 className='dsmeta-sales-title'>Vendas</h2>
@@ -46,11 +52,11 @@ function SalesCard () {
               <table className='dsmeta-sales-table'>
                 <thead>
                   <tr>
-                    <th className='show992'>ID</th>
-                    <th className='show576'>Data</th>
+                    <th>ID</th>
+                    <th>Data</th>
                     <th>Vendedor</th>
-                    <th className='show992'>Visitas</th>
-                    <th className='show992'>Vendas</th>
+                    <th>Visitas</th>
+                    <th>Vendas</th>
                     <th>Total</th>
                     <th>Notificar</th>
                   </tr>
@@ -58,11 +64,11 @@ function SalesCard () {
                 <tbody>
                   {sales.map((sale) =>
                     (<tr key={sale.id}>
-                    <td className='show992'>#{sale.id}</td>
-                    <td className='show576'>{new Date(sale.date).toLocaleDateString()}</td>
+                    <td>#{sale.id}</td>
+                    <td>{new Date(sale.date).toLocaleDateString()}</td>
                     <td>{sale.sellerName}</td>
-                    <td className='show992'>{sale.visited}</td>
-                    <td className='show992'>{sale.deals}</td>
+                    <td>{sale.visited}</td>
+                    <td>{sale.deals}</td>
                     <td>R$ {sale.amount.toFixed(2)}</td>
                     <td>
                       <div className='dsmeta-red-btn-container'>
